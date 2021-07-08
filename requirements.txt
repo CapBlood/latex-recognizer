@@ -1,0 +1,6 @@
+pyside2
+numpy
+qdarkstyle
+tensorflow
+opencv-python
+setuptools
