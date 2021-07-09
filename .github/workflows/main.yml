@@ -1,0 +1,37 @@
+name: pyinstaller_realease
+
+on: 
+  workflow_dispatch:
+    inputs:
+      changes:
+        description: 'Changes'
+        required: true
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+      
+      - name: Pyinstaller Macos
+        run: pip install pyinstaller
+  
+      - name: Build
+        run: ./build.py
+#       - name: Create Release
+#         id: create_release
+#         uses: actions/create-release@v1
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           tag_name: ${{ github.ref }}
+#           release_name: Release ${{ github.ref }}
+#           body: ${{ github.event.inputs.changes }}
+#           draft: false
+#           prerelease: false
